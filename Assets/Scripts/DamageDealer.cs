@@ -9,6 +9,7 @@ public class DamageDealer : MonoBehaviour
         if (healthSystem != null)
         {
             healthSystem.TakeDamage(damage);
+            PointsSystem.OnPointsLost(this, new PointLostEventArguments(1, transform.position));
         }
     }
 }
