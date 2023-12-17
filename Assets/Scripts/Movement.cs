@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using Vector3 = UnityEngine.Vector3;
 
 public class Movement : MonoBehaviour
 {
@@ -26,7 +27,9 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _currentJumps < maxJumps)
         {
-            rb.velocity += Vector3.up * jumpForce;
+            //TODO czy nie zmienić na AddForce Impluse
+            //rb.velocity += Vector3.up * jumpForce;
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Force);
             _currentJumps++;
         }
 
@@ -34,11 +37,13 @@ public class Movement : MonoBehaviour
         {
             Vector3 dashDirection = Camera.main.transform.forward;
             dashDirection.y = 0;
-            rb.velocity += dashDirection * dashForce;
+            //rb.velocity += dashDirection * dashForce;
+            rb.AddForce(dashDirection * (dashForce * 10f), ForceMode.Force);
         }
 
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
 
+        //TODO REFACTOR
         if (transform.position.y < -5f) SceneManager.LoadScene(0);
     }
 

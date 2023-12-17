@@ -8,6 +8,7 @@ public class Coin : MonoBehaviour
         Debug.Log("COIN");
         if (other.transform.CompareTag("Player"))
         {
+            //TODO REFACTOR
             PointsSystem pointsSystem = GameObject.Find("Points System").GetComponent<PointsSystem>();
             pointsSystem.AddPoints(pointsToAdd);
             Destroy(gameObject);
