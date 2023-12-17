@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Acceleration: 25
   MaxSpeed: 15
-  JumpForce: 1500
-  DashForce: 750
-  DashAmount: 2
-  DashCooldown: 1
+  JumpForce: 2500
+  DashForce: 0
+  DashAmount: 0
+  DashCooldown: 0
   Mass: 25
   MaxJumps: 2
