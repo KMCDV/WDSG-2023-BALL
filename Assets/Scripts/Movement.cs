@@ -1,3 +1,4 @@
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -5,46 +6,51 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Movement : MonoBehaviour
 {
-    public Rigidbody rb;
-    public float acceleration = 3f;
-    public float maxSpeed = 10f;
-    public float jumpForce = 6f;
-    public float dashForce = 10f;
-
-    public int maxJumps = 2;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField, Header("Player Preset")] private PlayerMovementPreset playerMovementPreset;
+    
+    private Camera mainCamera;
     private int _currentJumps = 0;
     
-    void Update()
+    [SerializeField, Header("Keybinds")] private KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] private KeyCode dashKey = KeyCode.LeftShift;
+    
+    private Vector3 startingPosition;
+
+    private void Start()
+    {
+        startingPosition = transform.position;
+        playerMovementPreset.ApplyMassToRigidbody(gameObject);
+        mainCamera = Camera.main;
+        if(mainCamera == null)
+            Debug.LogError("Main camera is not found!");
+    }
+
+    private void Update()
     {
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
 
-        float cameraAngleY = Camera.main.transform.eulerAngles.y;
+        float cameraAngleY = mainCamera.transform.eulerAngles.y;
         
         Vector3 direction = new(inputX, 0, inputY);
 
-        rb.velocity += Quaternion.Euler(0, cameraAngleY, 0) * direction * (acceleration * Time.deltaTime);
+        rb.velocity += Quaternion.Euler(0, cameraAngleY, 0) * direction * (playerMovementPreset.Acceleration * Time.deltaTime);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, playerMovementPreset.MaxSpeed);
 
-        if (Input.GetKeyDown(KeyCode.Space) && _currentJumps < maxJumps)
+        
+        if (Input.GetKeyDown(jumpKey) && _currentJumps < playerMovementPreset.MaxJumps)
         {
-            //TODO czy nie zmienić na AddForce Impluse
-            //rb.velocity += Vector3.up * jumpForce;
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Force);
+            rb.AddForce(Vector3.up * playerMovementPreset.JumpForce, ForceMode.Impulse);
             _currentJumps++;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(dashKey))
         {
-            Vector3 dashDirection = Camera.main.transform.forward;
+            Vector3 dashDirection = mainCamera.transform.forward;
             dashDirection.y = 0;
-            //rb.velocity += dashDirection * dashForce;
-            rb.AddForce(dashDirection * (dashForce * 10f), ForceMode.Force);
+            rb.AddForce(dashDirection * (playerMovementPreset.DashForce * 10f), ForceMode.Impulse);
         }
-
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
-
-        //TODO REFACTOR
-        if (transform.position.y < -5f) SceneManager.LoadScene(0);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -53,5 +59,13 @@ public class Movement : MonoBehaviour
         {
             _currentJumps = 0;
         }
+    }
+    
+    public void ResetPosition()
+    {
+        rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
+        transform.position = startingPosition;
+        rb.isKinematic = false;
     }
 }

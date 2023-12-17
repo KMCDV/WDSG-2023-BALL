@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411ef6ce5f184424284f31e78c9b12d0, type: 3}
+  m_Name: Default Player
+  m_EditorClassIdentifier: 
+  Acceleration: 25
+  MaxSpeed: 15
+  JumpForce: 1500
+  DashForce: 750
+  DashAmount: 2
+  DashCooldown: 1
+  Mass: 25
+  MaxJumps: 2
