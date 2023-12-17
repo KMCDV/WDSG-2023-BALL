@@ -10,9 +10,10 @@ public class PointsSystem : MonoBehaviour
     public static event EventHandler<PointLostEventArguments> PointLost;
     public static void OnPointsLost(object sender, PointLostEventArguments eventArguments) => PointLost?.Invoke(sender, eventArguments);
     
+    public static event EventHandler<PointsUpdatedEventArguments> PointsUpdated;
+    
 
     [SerializeField] private int currentPoints = 0;
-    public TextMeshProUGUI currentPointsText;
     
     private void OnEnable()
     {
@@ -30,13 +31,13 @@ public class PointsSystem : MonoBehaviour
     public void AddPoints(object sender, PointCollectedEventArguments arguments)
     {
         currentPoints += arguments.Points;
-        currentPointsText.text = $"{currentPoints}";
+        PointsUpdated?.Invoke(this, new PointsUpdatedEventArguments(currentPoints));
     }
 
     public void RemovePoints(object sender, PointLostEventArguments p_eventArgs)
     {
         currentPoints -= p_eventArgs.Points;
-        currentPointsText.text = $"Points: {currentPoints}";
+        PointsUpdated?.Invoke(this, new PointsUpdatedEventArguments(currentPoints));
     }
 }
 
@@ -62,4 +63,10 @@ public class PointLostEventArguments : EventArgs
         Position = p_position;
         Points = points;
     }
+}
+
+public class PointsUpdatedEventArguments : EventArgs
+{
+    public int Points { get; }
+    public PointsUpdatedEventArguments(int points) => Points = points;
 }
