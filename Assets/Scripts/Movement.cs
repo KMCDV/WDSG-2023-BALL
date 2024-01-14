@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     
     [SerializeField, Header("Keybinds")] private KeyCode jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode dashKey = KeyCode.LeftShift;
+    private float currentDashCooldown = 0f;
     
     private Vector3 startingPosition;
 
@@ -36,20 +37,28 @@ public class Movement : MonoBehaviour
         Vector3 direction = new(inputX, 0, inputY);
 
         rb.velocity += Quaternion.Euler(0, cameraAngleY, 0) * direction * (playerMovementPreset.Acceleration * Time.deltaTime);
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, playerMovementPreset.MaxSpeed);
-
-        
+        if (currentDashCooldown <= 0f)
+        {
+            Vector3 clampMagnitude = Vector3.ClampMagnitude(rb.velocity, playerMovementPreset.MaxSpeed);
+            clampMagnitude.y = rb.velocity.y;
+            rb.velocity = clampMagnitude;
+        }
+        if(currentDashCooldown > 0)
+            currentDashCooldown -= Time.deltaTime;
         if (Input.GetKeyDown(jumpKey) && _currentJumps < playerMovementPreset.MaxJumps)
         {
-            rb.AddForce(Vector3.up * playerMovementPreset.JumpForce, ForceMode.Impulse);
+            rb.velocity += Vector3.up * playerMovementPreset.JumpForce;
+            //rb.AddForce(Vector3.up * playerMovementPreset.JumpForce, ForceMode.Impulse);
             _currentJumps++;
         }
 
-        if (Input.GetKeyDown(dashKey))
+        if (Input.GetKeyDown(dashKey) && currentDashCooldown <= 0f)
         {
+            currentDashCooldown = playerMovementPreset.DashCooldown;
             Vector3 dashDirection = mainCamera.transform.forward;
             dashDirection.y = 0;
-            rb.AddForce(dashDirection * (playerMovementPreset.DashForce * 10f), ForceMode.Impulse);
+            rb.velocity *= playerMovementPreset.DashForce;
+            //rb.AddForce(dashDirection * ( * 10f), ForceMode.Impulse);
         }
     }
 
