@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5dd2b9887d0f4571ac2a48b7d5d0ea2c, type: 3}
-  m_Name: Level 0
+  m_Name: Nowy Poziom
   m_EditorClassIdentifier: 
-  SceneName: Level 0
-  Description: My First Level
+  SceneName: Nowy Poziom
+  Description: NADSASDFasd
   Image: {fileID: 0}
-  PointsToEarn: 1
+  PointsToEarn: 3

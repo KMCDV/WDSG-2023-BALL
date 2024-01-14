@@ -1,14 +1,19 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/Editor/LevelCreator.uss?fileID=7433441132597879392&amp;guid=df45bb32d3e9b2840ad6bc87e08e7839&amp;type=3#LevelCreator" />
     <ui:VisualElement style="flex-grow: 1; padding-top: 15px; padding-left: 15px; padding-right: 15px;">
         <ui:Label text="Scene Editor" class="custom-label" style="color: rgb(255, 255, 255); padding-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
         <ui:VisualElement name="Separator" style="flex-grow: 1; width: 33px; height: 15px; min-height: 15px; max-height: 15px;" />
-        <ui:VisualElement style="flex-grow: 1;">
-            <ui:Label tabindex="-1" text="Level Creation" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 25px;" />
+        <ui:Foldout text="Level Creation" name="Foldout" value="false" style="font-size: 15px; -unity-font-style: bold;">
             <ui:TextField picking-mode="Ignore" label="Level Name&#x9;" value="filler text" name="level-create-new-level-name" />
             <ui:TextField picking-mode="Ignore" label="Description" value="filler text" name="level-create-new-level-description" />
             <ui:IntegerField label="Points to Collect" value="42" name="level-create-new-level-points" />
             <ui:Button text="Create Level" parse-escape-sequences="true" display-tooltip-when-elided="true" name="level-create-button" />
-        </ui:VisualElement>
+        </ui:Foldout>
+        <ui:Foldout text="Level Management" name="Foldout" value="true" style="font-size: 15px; -unity-font-style: bold;">
+            <ui:DropdownField label="Level" index="-1" name="level-select-dropdown" />
+            <ui:VisualElement style="flex-grow: 1;">
+                <ui:VisualElement name="so-editor" style="flex-grow: 1; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; max-height: none;" />
+            </ui:VisualElement>
+        </ui:Foldout>
     </ui:VisualElement>
 </ui:UXML>
