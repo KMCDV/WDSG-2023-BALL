@@ -12,9 +12,14 @@ public class PointsText : MonoBehaviour
         pointsText = GetComponent<TextMeshProUGUI>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         PointsSystem.PointsUpdated += UpdatePointsText;
+    }
+    
+    private void OnDisable()
+    {
+        PointsSystem.PointsUpdated -= UpdatePointsText;
     }
 
     private void UpdatePointsText(object p_sender, PointsUpdatedEventArguments p_e)

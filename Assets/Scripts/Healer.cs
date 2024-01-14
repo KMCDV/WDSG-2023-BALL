@@ -6,11 +6,9 @@ public class Healer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        HealthSystem healthSystem = other.gameObject.GetComponent<HealthSystem>();
-        if (healthSystem != null && healthSystem.CanBeHealed())
-        {
-            healthSystem.Heal(healAmount);
-            Destroy(gameObject);
-        }
+        if (!other.TryGetComponent<Movement>(out Movement player))
+            return;
+        HealthSystem.OnPlayerHealed(this, new PlayerHealedEventArguments(healAmount, transform.position, player.playerID));
+        Destroy(gameObject);
     }
 }

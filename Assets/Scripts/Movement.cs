@@ -1,4 +1,6 @@
+using System;
 using Unity.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -6,6 +8,10 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Movement : MonoBehaviour
 {
+
+    public string playerID;
+    
+    
     [SerializeField] private Rigidbody rb;
     [SerializeField, Header("Player Preset")] private PlayerMovementPreset playerMovementPreset;
     
@@ -17,6 +23,11 @@ public class Movement : MonoBehaviour
     private float currentDashCooldown = 0f;
     
     private Vector3 startingPosition;
+
+    private void OnValidate()
+    {
+        playerID = Guid.NewGuid().ToString();
+    }
 
     private void Start()
     {
@@ -57,8 +68,7 @@ public class Movement : MonoBehaviour
             currentDashCooldown = playerMovementPreset.DashCooldown;
             Vector3 dashDirection = mainCamera.transform.forward;
             dashDirection.y = 0;
-            rb.velocity *= playerMovementPreset.DashForce;
-            //rb.AddForce(dashDirection * ( * 10f), ForceMode.Impulse);
+            rb.velocity += dashDirection * playerMovementPreset.DashForce;
         }
     }
 
