@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 23e3cec9621799041bb3240d281ed106
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level1.unity
+    guid: d6def3779af976c44ae0b7bfc5e64144
+  - enabled: 1
+    path: Assets/Scenes/Levels/filler text.unity
+    guid: bf4ebbff37080774486afe1155fe6196
+  - enabled: 1
+    path: Assets/Scenes/Levels/Cosmic Base of Jumping.unity
+    guid: 825f17485221753409de46284c9fb9e1
   m_configObjects: {}

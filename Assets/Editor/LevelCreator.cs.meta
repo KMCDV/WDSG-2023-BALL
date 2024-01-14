@@ -4,6 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - sceneAssetPrefabForNewLevels: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
   - m_VisualTreeAsset: {fileID: 9197481963319205126, guid: 9264e8505df9a6b499f4c18149d92e61, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
