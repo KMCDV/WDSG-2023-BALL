@@ -59,7 +59,6 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(jumpKey) && _currentJumps < playerMovementPreset.MaxJumps)
         {
             rb.velocity += Vector3.up * playerMovementPreset.JumpForce;
-            //rb.AddForce(Vector3.up * playerMovementPreset.JumpForce, ForceMode.Impulse);
             _currentJumps++;
         }
 
