@@ -68,20 +68,13 @@ public class LevelCreator : EditorWindow
         if (selectedLevelData == null) return;
         
         visualElement.Clear();
-        VisualElement scriptableInspector = Editor.CreateEditor(selectedLevelData).CreateInspectorGUI();
+        LevelDataCuystomEditor editor = Editor.CreateEditor(selectedLevelData) as LevelDataCuystomEditor;
+        editor.ClearSubscribers();
+        VisualElement scriptableInspector = editor.CreateInspectorGUI();
         visualElement.Add(scriptableInspector);
-        /*foreach (VisualElement element in scriptableInspector.Children())
-        {
-            if(element is PropertyField propertyField)
-            {
-                propertyField.RegisterValueChangeCallback((x) =>
-                {
-                    visualElement.Add(CreateErrorWithFixButton("Value of SO Changed", "Reload",
-                        () => { SetupLevelToEdit(levelDataName); }));
-                });
-            }
-        }*/
-        
+        List<VisualElement> visualElements = scriptableInspector.Children().ToList();
+  
+
         if (CheckLevelSceneName(levelDataName, visualElement))
             return;
 
@@ -110,6 +103,17 @@ public class LevelCreator : EditorWindow
                 EditorSceneManager.SaveScene(newScene);
                 SetupLevelToEdit(levelDataName);
             }));
+
+        VisualElement UpdateWarnings = new VisualElement();
+        visualElement.Add(UpdateWarnings);
+        
+        editor.ValueChanged += () =>
+        {
+            UpdateWarnings.Clear();
+            UpdateWarnings.Add(CreateErrorWithFixButton("Value of SO Changed", "Reload",
+                    () => { SetupLevelToEdit(levelDataName); }));
+        };
+
     }
 
     private bool CheckLevelAssetIsInBuildSettings(string levelDataName, VisualElement visualElement)
@@ -188,7 +192,6 @@ public class LevelCreator : EditorWindow
         _newLevelDescriptionTextField = root.Q<TextField>(LEVEL_CREATE_NEW_LEVEL_DESCRIPTION);
         _newLevelPointsToEarnIntegerField = root.Q<IntegerField>(LEVEL_CREATE_NEW_LEVEL_POINTS);
         _createNewLevelButton = root.Q<Button>(LEVEL_CREATE_BUTTON);
-
         _createNewLevelButton.clicked += CreateNewLevel;
     }
 

@@ -17,3 +17,34 @@ public class MainMenuLevelSelectionGrid : MonoBehaviour
         }
     }
 }
+
+
+
+
+
+/*
+ * SCRIPTABLE OBJECT -> PlayerSkin
+ *
+ * public Material 
+ * public Color
+ * public string
+ * public Sprite skinPreview 
+ *
+ * [CreateAssetMenu]
+ * 
+ *
+ * Resources -> folder Skins -> 4 objecty skinów
+ *
+ * 
+ */
+
+
+
+
+
+
+
+
+
+
+
