@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 85178477953023008}
   - component: {fileID: 1443665204505164610}
   - component: {fileID: 4372576716353006610}
+  - component: {fileID: 3980951159134275376}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5bf416608f3435fb8f163897088042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: b545d189-1569-4c58-b6b7-65040199fef8
+  playerID: aa41cfb6-b63f-40bf-a3eb-538e96f2706e
   rb: {fileID: 1349887251709834903}
   playerMovementPreset: {fileID: 11400000, guid: 4ccb2fc07a166274aa6cc853a1f4e361, type: 2}
   jumpKey: 32
@@ -180,3 +181,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 3
+--- !u!114 &3980951159134275376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978242761401062339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911f31929bcdc62498a55badd6041efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeshRenderer: {fileID: 4320415457843287057}
+  CurrentPlayerSkin: {fileID: 0}

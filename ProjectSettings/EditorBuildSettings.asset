@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Nowy Poziom.unity
     guid: f6483364ae7299f45af96a2132ae31af
+  - enabled: 1
+    path: Assets/Scenes/SkinSelection.unity
+    guid: e2b3519d8c800eb498afb2a9c55425d7
   m_configObjects: {}

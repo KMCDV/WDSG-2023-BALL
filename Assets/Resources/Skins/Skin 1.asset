@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dd2b9887d0f4571ac2a48b7d5d0ea2c, type: 3}
-  m_Name: filler text
+  m_Script: {fileID: 11500000, guid: edb3247550874be799d6c2c590e21257, type: 3}
+  m_Name: Skin 1
   m_EditorClassIdentifier: 
-  SceneName: filler textt
-  Description: filler text
-  Image: {fileID: 0}
-  PointsToEarn: 42
+  SkinName: Skin 1
+  Material: {fileID: 2100000, guid: 5e49cfe9d1fd5fa47972695021aab990, type: 2}
+  Color: {r: 1, g: 0.13679248, b: 0.13679248, a: 0}
+  preview: {fileID: 0}
